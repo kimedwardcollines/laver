@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('contactForm');
+    if (!form) return;
+    
     const formStatus = form.querySelector('.form-status');
 
     // Error messages for validation
@@ -86,25 +88,35 @@ document.addEventListener('DOMContentLoaded', () => {
             const formData = new FormData(form);
             const data = Object.fromEntries(formData.entries());
 
-            // Here you would normally send the data to your server
-            // For demonstration, we'll simulate a server response
-            await new Promise(resolve => setTimeout(resolve, 1500));
+            // Send to Formspree (replace YOUR_FORM_ID with your actual Formspree form ID)
+            // Sign up at https://formspree.io to get your form ID
+            const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
 
-            // Show success message
-            formStatus.className = 'form-status success';
-            formStatus.textContent = 'Thank you! Your message has been sent successfully.';
-            form.reset();
+            if (response.ok) {
+                // Show success message
+                formStatus.className = 'form-status success';
+                formStatus.innerHTML = '<i class="fas fa-check-circle"></i> Thank you! Your message has been sent successfully. We will get back to you soon.';
+                form.reset();
 
-            // Hide success message after 5 seconds
-            setTimeout(() => {
-                formStatus.className = 'form-status';
-                formStatus.textContent = '';
-            }, 5000);
+                // Hide success message after 8 seconds
+                setTimeout(() => {
+                    formStatus.className = 'form-status';
+                    formStatus.innerHTML = '';
+                }, 8000);
+            } else {
+                throw new Error('Form submission failed');
+            }
 
         } catch (error) {
             // Show error message
             formStatus.className = 'form-status error';
-            formStatus.textContent = 'Sorry, there was a problem sending your message. Please try again later.';
+            formStatus.innerHTML = '<i class="fas fa-exclamation-circle"></i> Sorry, there was a problem sending your message. Please try again or contact us directly at info@lavertransformation.org';
         } finally {
             // Remove loading state
             submitButton.classList.remove('loading');

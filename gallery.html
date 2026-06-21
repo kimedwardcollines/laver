@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Gallery - Laver Transformation Ministries | Photos & Media</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Browse photos from Laver Transformation Ministries - worship services, community outreach, youth programs, and special events in Wamala, Uganda.">
+    <meta name="keywords" content="church photos, gallery, Uganda church, worship photos, community outreach, youth ministry photos, church events">
+    <meta name="author" content="Laver Transformation Ministries">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://lavertransformation.org/gallery.html">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://lavertransformation.org/gallery.html">
+    <meta property="og:title" content="Gallery - Laver Transformation Ministries">
+    <meta property="og:description" content="Browse photos from our church community - worship services, outreach programs, and special events.">
+    <meta property="og:image" content="https://lavertransformation.org/src/church-image.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛪</text></svg>">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="src/assets/css/loading-states.css">
+    <link rel="stylesheet" href="src/assets/css/image-optimization.css">
+    <link rel="stylesheet" href="src/assets/css/social-share.css">
+    <link rel="stylesheet" href="src/assets/css/mobile-menu.css">
+    <link rel="stylesheet" href="src/assets/css/dark-mode.css">
+    <link rel="stylesheet" href="src/assets/css/nav-styles.css">
+    <link rel="stylesheet" href="src/assets/css/page-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            padding: 40px 0;
+        }
+        .gallery-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        .gallery-item .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            padding: 20px;
+            color: white;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .gallery-item:hover .overlay {
+            opacity: 1;
+        }
+        .gallery-filters {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        .filter-btn {
+            padding: 8px 20px;
+            border: 2px solid var(--primary-color, #1a365d);
+            border-radius: 25px;
+            background: transparent;
+            color: var(--primary-color, #1a365d);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--primary-color, #1a365d);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <header class="nav-container">
+        <nav class="nav" id="main-nav">
+            <a href="index.html" class="logo">
+                <i class="fas fa-church logo-icon"></i>
+                <span class="logo-text">Laver Transformation</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#ministries">Ministries</a></li>
+                <li><a href="sermons.html">Sermons</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="gallery.html" class="active">Gallery</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+            <a href="index.html#services" class="nav-btn nav-btn-primary">Join Us Sunday</a>
+            <button class="mobile-menu" aria-label="Toggle Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Photo Gallery</h1>
+            <p>Capturing moments of worship, fellowship, and transformation</p>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-page">
+        <div class="container">
+            <div class="section-intro">
+                <p>Explore moments from our church community - worship services, community outreach, youth programs, and special celebrations that glorify God.</p>
+            </div>
+
+            <!-- Filters -->
+            <div class="gallery-filters">
+                <a href="#" class="filter-btn active">All</a>
+                <a href="#" class="filter-btn">Worship</a>
+                <a href="#" class="filter-btn">Outreach</a>
+                <a href="#" class="filter-btn">Youth</a>
+                <a href="#" class="filter-btn">Special Events</a>
+            </div>
+
+            <!-- Gallery Grid -->
+            <div class="gallery-grid">
+                <!-- Gallery Item 1 -->
+                <div class="gallery-item">
+                    <img src="src/church-image.jpg" alt="Sunday Worship Service" loading="lazy">
+                    <div class="overlay">
+                        <h4>Sunday Worship Service</h4>
+                        <p>Regular Sunday Service</p>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 2 -->
+                <div class="gallery-item">
+                    <img src="src/church-image.jpg" alt="Youth Fellowship" loading="lazy">
+                    <div class="overlay">
+                        <h4>Youth Fellowship</h4>
+                        <p>Weekly Youth Service</p>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 3 -->
+                <div class="gallery-item">
+                    <img src="src/church-image.jpg" alt="Community Outreach" loading="lazy">
+                    <div class="overlay">
+                        <h4>Community Outreach</h4>
+                        <p>Serving Our Community</p>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 4 -->
+                <div class="gallery-item">
+                    <img src="src/church-image.jpg" alt="Worship Team" loading="lazy">
+                    <div class="overlay">
+                        <h4>Worship Team</h4>
+                        <p>Praising Through Music</p>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 5 -->
+                <div class="gallery-item">
+                    <img src="src/church-image.jpg" alt="Bible Study" loading="lazy">
+                    <div class="overlay">
+                        <h4>Bible Study</h4>
+                        <p>Midweek Bible Study</p>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 6 -->
+                <div class="gallery-item">
+                    <img src="src/church-image.jpg" alt="Prayer Meeting" loading="lazy">
+                    <div class="overlay">
+                        <h4>Prayer Meeting</h4>
+                        <p>United in Prayer</p>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 7 -->
+                <div class="gallery-item">
+                    <img src="src/church-image.jpg" alt="Special Service" loading="lazy">
+                    <div class="overlay">
+                        <h4>Special Service</h4>
+                        <p>Thanksgiving Celebration</p>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 8 -->
+                <div class="gallery-item">
+                    <img src="src/church-image.jpg" alt="Children's Ministry" loading="lazy">
+                    <div class="overlay">
+                        <h4>Children's Ministry</h4>
+                        <p>Teaching the Next Generation</p>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 9 -->
+                <div class="gallery-item">
+                    <img src="src/church-image.jpg" alt="Church Fellowship" loading="lazy">
+                    <div class="overlay">
+                        <h4>Church Fellowship</h4>
+                        <p>Breaking Bread Together</p>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 10 -->
+                <div class="gallery-item">
+                    <img src="src/church-image.jpg" alt="Health Camp" loading="lazy">
+                    <div class="overlay">
+                        <h4>Health Camp</h4>
+                        <p>Community Health Outreach</p>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 11 -->
+                <div class="gallery-item">
+                    <img src="src/church-image.jpg" alt="Choir Performance" loading="lazy">
+                    <div class="overlay">
+                        <h4>Choir Performance</h4>
+                        <p>Praising Through Song</p>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 12 -->
+                <div class="gallery-item">
+                    <img src="src/church-image.jpg" alt="Church Building" loading="lazy">
+                    <div class="overlay">
+                        <h4>Our Church</h4>
+                        <p>Laver Transformation Ministries</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit Photos CTA -->
+            <div class="submit-photos">
+                <h3><i class="fas fa-camera"></i> Share Your Photos</h3>
+                <p>Have photos from church events? Share them with us to be featured in our gallery!</p>
+                <a href="index.html#contact" class="btn btn-primary">Submit Photos</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h3>Laver Transformation Ministries</h3>
+                    <p>A place of spiritual growth and transformation in Wamala.</p>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt"></i> Wamala, along Wamala Katoke Road</p>
+                        <p><i class="fas fa-phone"></i> +256 XXX XXX XXX</p>
+                        <p><i class="fas fa-envelope"></i> info@lavertransformation.org</p>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="index.html#ministries">Ministries</a></li>
+                        <li><a href="sermons.html">Sermons</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="give.html">Give</a></li>
+                    </ul>
+                </div>
+                <div class="service-times">
+                    <h4>Service Times</h4>
+                    <ul>
+                        <li>Sunday Service: 9:00 AM</li>
+                        <li>Youth Service: 2:00 PM</li>
+                        <li>Bible Study: Wed 7:00 PM</li>
+                        <li>Prayer Meeting: Fri 6:00 PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Laver Transformation Ministries. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="src/assets/js/nav-script.js" defer></script>
+    <script src="src/assets/js/mobile-menu.js" defer></script>
+    <script>
+        // Simple gallery filter
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
+
+        // Simple lightbox effect for gallery items
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const img = item.querySelector('img');
+                const overlay = document.createElement('div');
+                overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);z-index:9999;display:flex;align-items:center;justify-content:center;cursor:pointer;';
+                overlay.innerHTML = `<img src="${img.src}" style="max-width:90%;max-height:90%;border-radius:8px;">`;
+                overlay.addEventListener('click', () => overlay.remove());
+                document.body.appendChild(overlay);
+            });
+        });
+    </script>
+</body>
+</html>
