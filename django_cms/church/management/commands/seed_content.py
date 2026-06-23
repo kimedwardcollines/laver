@@ -64,14 +64,78 @@ class Command(BaseCommand):
         # Ministries
         if not Ministry.objects.exists():
             ministries_data = [
-                ('Youth Ministry', 'fas fa-users', 'Our Youth Ministry is dedicated to raising up young people who are rooted in faith and ready to impact their communities for Christ. We provide a safe and nurturing environment where youth can grow spiritually, build lasting friendships, and discover their God-given potential.', 1),
-                ('Children\'s Ministry', 'fas fa-child', 'Our Children\'s Ministry provides a safe, fun, and biblically grounded environment for children to grow in their faith. We believe in laying a strong foundation of God\'s Word at an early age.', 2),
-                ('Worship Ministry', 'fas fa-music', 'Our Worship Ministry creates an atmosphere where people can encounter God\'s presence through praise and worship. We use music, song, and creative expressions to lead the congregation into meaningful worship experiences.', 3),
-                ('Prayer Ministry', 'fas fa-pray', 'Our Prayer Ministry exists to intercede for the church, community, and world. We believe in the power of prayer and provide opportunities for people to grow in their prayer life.', 4),
-                ('Community Outreach', 'fas fa-hands-helping', 'Our Outreach Ministry is committed to meeting the physical and spiritual needs of our community. We believe in being the hands and feet of Christ by serving those around us.', 5),
-                ('Women\'s Ministry', 'fas fa-female', 'Our Women\'s Ministry creates a space for women to grow in faith, build meaningful relationships, and discover their God-given purpose. We offer Bible studies, fellowship events, and mentorship opportunities.', 6),
-                ('Men\'s Ministry', 'fas fa-male', 'Our Men\'s Ministry challenges men to grow in their faith, lead their families with integrity, and serve the church and community. We provide opportunities for fellowship, accountability, and spiritual growth.', 7),
-                ('Ushers & Hospitality', 'fas fa-door-open', 'Our Ushers & Hospitality Ministry ensures everyone who walks through our doors feels welcomed and cared for. We take pride in creating a warm and inviting atmosphere for all visitors and members.', 8),
+                ('Youth Ministry', 'fas fa-users', '''<p>Our Youth Ministry is dedicated to raising up young people who are rooted in faith and ready to impact their generation. Through worship, fellowship, and discipleship, we help youth discover their God-given potential.</p>
+<p>We create an environment where young people can build lasting friendships, grow spiritually, and develop leadership skills that will serve them throughout their lives.</p>
+<ul class="ministry-features">
+<li><i class="fas fa-check"></i> Weekly Youth Service (Sunday 2:00 PM)</li>
+<li><i class="fas fa-check"></i> Youth Bible Study</li>
+<li><i class="fas fa-check"></i> Leadership Training</li>
+<li><i class="fas fa-check"></i> Summer Camps & Retreats</li>
+<li><i class="fas fa-check"></i> Community Outreach</li>
+</ul>''', 1),
+                ('Children\'s Ministry', 'fas fa-child', '''<p>Our Children's Ministry provides a safe, fun, and biblically grounded environment for children to grow in their faith. We believe it's never too early to start a journey with Jesus.</p>
+<p>Through creative learning, worship, and fellowship, we help children develop a strong foundation of faith that will guide them throughout their lives.</p>
+<ul class="ministry-features">
+<li><i class="fas fa-check"></i> Sunday School</li>
+<li><i class="fas fa-check"></i> Children's Church</li>
+<li><i class="fas fa-check"></i> Vacation Bible School</li>
+<li><i class="fas fa-check"></i> Children's Choir</li>
+<li><i class="fas fa-check"></i> Youth Mentorship</li>
+</ul>''', 2),
+                ('Worship Ministry', 'fas fa-music', '''<p>Our Worship Ministry creates an atmosphere where people can encounter God's presence through praise and worship. We use music, song, and creative expression to glorify God and lead others into worship.</p>
+<p>Whether you sing, play an instrument, or simply love to worship, there's a place for you on our worship team.</p>
+<ul class="ministry-features">
+<li><i class="fas fa-check"></i> Main Worship Team</li>
+<li><i class="fas fa-check"></i> Choir Ministry</li>
+<li><i class="fas fa-check"></i> Instrumental Team</li>
+<li><i class="fas fa-check"></i> Dance Ministry</li>
+<li><i class="fas fa-check"></i> Sound & Media Team</li>
+</ul>''', 3),
+                ('Prayer Ministry', 'fas fa-pray', '''<p>Our Prayer Ministry exists to intercede for the church, community, and world. We believe in the power of prayer and its ability to bring about transformation and breakthrough.</p>
+<p>Join us as we seek God's face and intercede for the needs of others.</p>
+<ul class="ministry-features">
+<li><i class="fas fa-check"></i> Weekly Prayer Meeting (Friday 6:00 PM)</li>
+<li><i class="fas fa-check"></i> Prayer Chain Network</li>
+<li><i class="fas fa-check"></i> Morning Prayer Sessions</li>
+<li><i class="fas fa-check"></i> Prayer Walks</li>
+<li><i class="fas fa-check"></i> Intercessory Prayer Team</li>
+</ul>''', 4),
+                ('Community Outreach', 'fas fa-hands-helping', '''<p>Our Outreach Ministry is committed to meeting the physical and spiritual needs of our community. We believe in being the hands and feet of Jesus by serving those around us.</p>
+<p>From health camps to food drives, we actively seek opportunities to demonstrate God's love in practical ways.</p>
+<ul class="ministry-features">
+<li><i class="fas fa-check"></i> Health Camps</li>
+<li><i class="fas fa-check"></i> Food Drives</li>
+<li><i class="fas fa-check"></i> School Support Programs</li>
+<li><i class="fas fa-check"></i> Evangelism & Discipleship</li>
+<li><i class="fas fa-check"></i> Emergency Relief</li>
+</ul>''', 5),
+                ('Women\'s Ministry', 'fas fa-female', '''<p>Our Women's Ministry creates a space for women to grow in faith, build meaningful relationships, and discover their God-given purpose. We encourage women of all ages to connect and encourage one another.</p>
+<p>Through fellowship, Bible study, and mentorship, we seek to empower women to live out their God-given potential.</p>
+<ul class="ministry-features">
+<li><i class="fas fa-check"></i> Women's Fellowship</li>
+<li><i class="fas fa-check"></i> Bible Study Groups</li>
+<li><i class="fas fa-check"></i> Mentorship Program</li>
+<li><i class="fas fa-check"></i> Women's Retreats</li>
+<li><i class="fas fa-check"></i> Service Projects</li>
+</ul>''', 6),
+                ('Men\'s Ministry', 'fas fa-male', '''<p>Our Men's Ministry challenges men to grow in their faith, lead their families with integrity, and serve the church and community with excellence. We create spaces for honest fellowship and spiritual growth.</p>
+<p>Through accountability groups, Bible study, and brotherhood, we seek to raise up godly men who lead with wisdom and grace.</p>
+<ul class="ministry-features">
+<li><i class="fas fa-check"></i> Men's Fellowship</li>
+<li><i class="fas fa-check"></i> Bible Study Groups</li>
+<li><i class="fas fa-check"></i> Mentorship & Discipleship</li>
+<li><i class="fas fa-check"></i> Men's Retreats</li>
+<li><i class="fas fa-check"></i> Service Projects</li>
+</ul>''', 7),
+                ('Ushers & Hospitality', 'fas fa-concierge-bell', '''<p>Our Ushers & Hospitality Ministry ensures everyone who walks through our doors feels welcomed and cared for. We take pride in creating a warm, hospitable environment for all visitors and members.</p>
+<p>Every person who enters our church should feel the love of Christ through our hospitality.</p>
+<ul class="ministry-features">
+<li><i class="fas fa-check"></i> Sunday Service Ushers</li>
+<li><i class="fas fa-check"></i> Welcome Center</li>
+<li><i class="fas fa-check"></i> New Visitor Follow-up</li>
+<li><i class="fas fa-check"></i> Refreshments Team</li>
+<li><i class="fas fa-check"></i> Parking Team</li>
+</ul>''', 8),
             ]
             for name, icon, desc, order in ministries_data:
                 Ministry.objects.create(name=name, icon=icon, description=desc, display_order=order, is_active=True)
