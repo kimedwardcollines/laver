@@ -8,18 +8,6 @@ services:
       - path: /*
         name: Cache-Control
         value: public, max-age=0, must-revalidate
-      - path: "/*.css"
-        name: Cache-Control
-        value: public, max-age=31536000
-      - path: "/*.js"
-        name: Cache-Control
-        value: public, max-age=31536000
-      - path: "/*.jpg"
-        name: Cache-Control
-        value: public, max-age=31536000
-      - path: "/*.png"
-        name: Cache-Control
-        value: public, max-age=31536000
-      - path: "/*.svg"
-        name: Cache-Control
-        value: public, max-age=31536000
+    rewrites:
+      - source: /
+        destination: /index.html
