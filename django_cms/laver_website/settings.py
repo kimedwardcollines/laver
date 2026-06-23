@@ -108,6 +108,7 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 # CKEditor
+CKEDITOR_UPLOAD_PATH = 'uploads/ckeditor/'
 CKEDITOR_CONFIGS = {
     'default': {
         'toolbar': 'Full',
