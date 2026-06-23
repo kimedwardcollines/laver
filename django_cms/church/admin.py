@@ -262,12 +262,16 @@ class GivingInfoAdmin(admin.ModelAdmin):
 # Contact Message Admin
 @admin.register(ContactMessage)
 class ContactMessageAdmin(admin.ModelAdmin):
-    list_display = ['name', 'email', 'subject', 'is_read', 'created_at']
+    list_display = ['full_name', 'email', 'subject', 'is_read', 'created_at']
     list_filter = ['is_read', 'subject', 'created_at']
-    search_fields = ['name', 'email', 'message']
+    search_fields = ['first_name', 'last_name', 'email', 'message']
     list_editable = ['is_read']
     readonly_fields = ['created_at']
     actions = ['mark_as_read', 'mark_as_unread']
+    
+    def full_name(self, obj):
+        return f"{obj.first_name} {obj.last_name}"
+    full_name.short_description = 'Name'
     
     def mark_as_read(self, request, queryset):
         queryset.update(is_read=True)
