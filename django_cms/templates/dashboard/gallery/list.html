@@ -1,0 +1,41 @@
+{% extends 'dashboard/base.html' %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3><i class="fas fa-images me-2"></i>Gallery Albums</h3>
+        <a href="{% url 'dashboard' %}" class="btn btn-outline-secondary btn-sm"><i class="fas fa-arrow-left me-2"></i>Back</a>
+    </div>
+
+    <div class="card-custom">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Image Count</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for album in albums %}
+                    <tr>
+                        <td><strong>{{ album.name }}</strong></td>
+                        <td>{{ album.images.count }}</td>
+                        <td>
+                            <a href="{% url 'gallery_edit' album.id %}" class="btn btn-sm btn-outline-primary">
+                                <i class="fas fa-edit"></i> Edit
+                            </a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="3" class="text-center text-muted">No albums found.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
