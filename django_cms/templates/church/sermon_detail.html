@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="page-hero" style="background: linear-gradient(135deg, rgba(27, 77, 122, 0.9), rgba(13, 40, 64, 0.95)), url('{{ church.logo.url|default:"/static/images/church-bg.jpg" }}') center/cover;">
+    <div class="container">
+        <h1>{{ sermon.title }}</h1>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                {% if sermon.video_url %}
+                <div class="ratio ratio-16x9 mb-4">
+                    <iframe src="{{ sermon.video_url }}" allowfullscreen></iframe>
+                </div>
+                {% else %}
+                <div class="text-center py-5 bg-light rounded-4 mb-4">
+                    <i class="fas fa-video fa-4x text-muted"></i>
+                </div>
+                {% endif %}
+                
+                <h2>{{ sermon.title }}</h2>
+                {% if sermon.speaker %}<p class="text-primary"><i class="fas fa-user me-2"></i>{{ sermon.speaker.name }}</p>{% endif %}
+                <p class="text-muted"><i class="far fa-calendar me-2"></i>{{ sermon.date_preached|date:'M d, Y' }}</p>
+                
+                {% if sermon.description %}
+                <div class="content mt-4">
+                    {{ sermon.description|safe }}
+                </div>
+                {% endif %}
+                
+                {% if sermon.sermon_notes %}
+                <div class="mt-4">
+                    <a href="{{ sermon.sermon_notes.url }}" class="btn btn-outline-primary" download>
+                        <i class="fas fa-download me-2"></i>Download Sermon Notes
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

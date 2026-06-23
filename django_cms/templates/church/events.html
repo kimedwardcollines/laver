@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="page-hero" style="background: linear-gradient(135deg, rgba(27, 77, 122, 0.9), rgba(13, 40, 64, 0.95)), url('{{ church.logo.url|default:"/static/images/church-bg.jpg" }}') center/cover;">
+    <div class="container">
+        <h1>Upcoming Events</h1>
+        <p>Mark your calendar</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        {% if events %}
+        <div class="row g-4">
+            {% for event in events %}
+            <div class="col-lg-6">
+                <div class="event-card">
+                    <div class="row g-0">
+                        <div class="col-auto">
+                            <div class="event-date">
+                                <p class="day">{{ event.start_date|date:'d' }}</p>
+                                <p class="month">{{ event.start_date|date:'M' }}</p>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="event-content">
+                                <h4>{{ event.title }}</h4>
+                                <p><i class="far fa-clock me-2"></i>{{ event.start_date|time:'H:i' }}</p>
+                                {% if event.location %}<p><i class="fas fa-map-marker-alt me-2"></i>{{ event.location }}</p>{% endif %}
+                                <p>{{ event.description|striptags|truncatewords:20 }}</p>
+                                {% if event.registration_link %}
+                                <a href="{{ event.registration_link }}" class="btn btn-primary btn-sm" target="_blank">Register</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="text-center">
+            <p class="text-muted">No upcoming events at this time.</p>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<style>
+.page-hero { padding: 150px 0 100px; text-align: center; color: #fff; }
+.page-hero h1 { font-size: 3rem; margin-bottom: 10px; }
+.event-card { background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.1); height: 100%; }
+.event-date { background: var(--primary); color: #fff; padding: 20px; text-align: center; min-width: 100px; }
+.event-date .day { font-size: 2.5rem; font-weight: 700; line-height: 1; margin: 0; }
+.event-date .month { font-size: 0.9rem; text-transform: uppercase; margin: 0; }
+.event-content { padding: 25px; }
+.event-content h4 { color: var(--primary); margin-bottom: 10px; }
+.event-content p { color: var(--gray); margin-bottom: 5px; font-size: 0.9rem; }
+</style>
+{% endblock %}

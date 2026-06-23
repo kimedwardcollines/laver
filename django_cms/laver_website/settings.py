@@ -25,8 +25,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     # Third party
-    'crispy_forms',
-    'crispy_bootstrap5',
     'ckeditor',
     'django_cleanup',
     # Local apps
@@ -102,10 +100,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Site ID
 SITE_ID = 1
-
-# Crispy Forms
-CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
-CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 # CKEditor
 CKEDITOR_UPLOAD_PATH = 'uploads/ckeditor/'

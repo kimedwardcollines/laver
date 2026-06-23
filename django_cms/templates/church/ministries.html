@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="page-hero" style="background: linear-gradient(135deg, rgba(27, 77, 122, 0.9), rgba(13, 40, 64, 0.95)), url('{{ church.logo.url|default:"/static/images/church-bg.jpg" }}') center/cover;">
+    <div class="container">
+        <h1>Our Ministries</h1>
+        <p>Find your place to serve and grow</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        {% if ministries %}
+        <div class="row g-4">
+            {% for ministry in ministries %}
+            <div class="col-lg-4 col-md-6">
+                <div class="ministry-card">
+                    <div class="ministry-icon">
+                        <i class="fas {% if ministry.icon %}{{ ministry.icon }}{% else %}fa-church{% endif %}"></i>
+                    </div>
+                    <h3>{{ ministry.name }}</h3>
+                    <p>{{ ministry.description|striptags|truncatewords:30 }}</p>
+                    {% if ministry.leader %}
+                    <p class="ministry-leader"><i class="fas fa-user me-2"></i>{{ ministry.leader.name }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="text-center">
+            <p class="text-muted">Ministries coming soon...</p>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<style>
+.page-hero { padding: 150px 0 100px; text-align: center; color: #fff; }
+.page-hero h1 { font-size: 3rem; margin-bottom: 10px; }
+.ministry-card { background: #fff; border-radius: 20px; padding: 40px; text-align: center; box-shadow: 0 10px 40px rgba(0,0,0,0.1); height: 100%; }
+.ministry-icon { width: 80px; height: 80px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 25px; }
+.ministry-icon i { font-size: 2rem; color: #fff; }
+.ministry-card h3 { color: var(--primary); margin-bottom: 15px; }
+.ministry-card p { color: var(--gray); }
+.ministry-leader { color: var(--secondary) !important; font-weight: 600; margin-top: 15px !important; }
+</style>
+{% endblock %}

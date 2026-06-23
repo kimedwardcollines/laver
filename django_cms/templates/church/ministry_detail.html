@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="page-hero" style="background: linear-gradient(135deg, rgba(27, 77, 122, 0.9), rgba(13, 40, 64, 0.95)), url('{{ ministry.image.url|default:"/static/images/church-bg.jpg" }}') center/cover;">
+    <div class="container">
+        <h1>{{ ministry.name }}</h1>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                {% if ministry.image %}
+                <img src="{{ ministry.image.url }}" alt="{{ ministry.name }}" class="img-fluid rounded-4 mb-4">
+                {% endif %}
+                <div class="content">
+                    {{ ministry.description|safe }}
+                </div>
+                {% if ministry.leader %}
+                <div class="mt-4 p-4 bg-light rounded-4">
+                    <h4>Ministry Leader</h4>
+                    <p class="mb-0"><strong>{{ ministry.leader.name }}</strong> - {{ ministry.leader.position }}</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

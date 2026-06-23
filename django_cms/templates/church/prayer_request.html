@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="page-hero" style="background: linear-gradient(135deg, rgba(27, 77, 122, 0.9), rgba(13, 40, 64, 0.95)), url('{{ church.logo.url|default:"/static/images/church-bg.jpg" }}') center/cover;">
+    <div class="container">
+        <h1>Prayer Request</h1>
+        <p>We're here to pray with you</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card-custom">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-pray fa-3x text-primary"></i>
+                        <h2 class="mt-3">Submit Your Prayer Request</h2>
+                        <p class="text-muted">Our prayer team is ready to stand with you in prayer.</p>
+                    </div>
+                    
+                    <form method="post" action="{% url 'prayer_request_submit' %}">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label class="form-label">Your Name</label>
+                            <input type="text" name="name" class="form-control" placeholder="Enter your name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email Address</label>
+                            <input type="email" name="email" class="form-control" placeholder="Enter your email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Phone Number (Optional)</label>
+                            <input type="tel" name="phone" class="form-control" placeholder="Enter your phone number">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Prayer Request</label>
+                            <textarea name="request" class="form-control" rows="6" placeholder="Share your prayer request..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary-custom w-100">
+                            <i class="fas fa-paper-plane me-2"></i>Submit Prayer Request
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section section-light text-center">
+    <div class="container">
+        <h2>Need Immediate Prayer?</h2>
+        <p class="mb-4">Call us directly and our team will pray with you right away.</p>
+        {% if church.phone %}
+        <a href="tel:{{ church.phone }}" class="btn btn-primary-custom">
+            <i class="fas fa-phone me-2"></i>{{ church.phone }}
+        </a>
+        {% endif %}
+    </div>
+</section>
+
+<style>
+.page-hero { padding: 150px 0 100px; text-align: center; color: #fff; }
+.page-hero h1 { font-size: 3rem; margin-bottom: 10px; }
+.card-custom { background: #fff; border-radius: 20px; padding: 50px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); }
+.form-control { border: 2px solid #e9ecef; border-radius: 10px; padding: 15px; }
+.form-control:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(27, 77, 122, 0.1); }
+</style>
+{% endblock %}
