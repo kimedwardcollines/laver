@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<section class="page-hero" style="background: linear-gradient(135deg, rgba(27, 77, 122, 0.9), rgba(13, 40, 64, 0.95)), url('{{ church.logo.url|default:"/static/images/church-bg.jpg" }}') center/cover;">
+<section class="page-hero" style="background: linear-gradient(135deg, rgba(27, 77, 122, 0.9), rgba(13, 40, 64, 0.95)), url('{% if church.logo %}{{ church.logo.url }}{% else %}/static/images/church-bg.jpg{% endif %}') center/cover;">
     <div class="container">
         <h1>Sermons</h1>
         <p>Be encouraged by the Word of God</p>
