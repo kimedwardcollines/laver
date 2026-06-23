@@ -47,8 +47,13 @@
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-    <!-- Add IntersectionObserver polyfill for older browsers -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=IntersectionObserver"></script>
+    <!-- IntersectionObserver polyfill for older browsers (optional) -->
+    <script>
+    // Minimal polyfill for IntersectionObserver
+    if (!('IntersectionObserver' in window)) {
+        document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/intersection-observer/1.0.0/intersection-observer.js"><\/script>');
+    }
+    </script>
 
     <!-- JavaScript Components -->
     <script src="src/assets/js/nav-script.js" defer></script>
