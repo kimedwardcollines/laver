@@ -263,6 +263,138 @@
             .gallery-item, .gallery-item:nth-child(1) { grid-column: span 1; height: 200px; }
             .welcome-card { padding: 30px; }
         }
+        
+        /* DARK MODE */
+        [data-theme="dark"] {
+            --dark-bg: #0D1117;
+            --dark-card: #161B22;
+            --dark-text: #E6EDF3;
+            --dark-text-secondary: #8B949E;
+            --dark-border: #30363D;
+        }
+        
+        [data-theme="dark"] body {
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+        }
+        
+        [data-theme="dark"] .section-light {
+            background-color: var(--dark-card);
+        }
+        
+        [data-theme="dark"] .section-dark {
+            background-color: #0a0a12;
+        }
+        
+        [data-theme="dark"] .navbar {
+            background: var(--dark-card) !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        
+        [data-theme="dark"] .navbar-brand,
+        [data-theme="dark"] .nav-link {
+            color: var(--dark-text) !important;
+        }
+        
+        [data-theme="dark"] .hero {
+            background: linear-gradient(135deg, rgba(13, 40, 64, 0.95), rgba(5, 15, 25, 0.98)), url('src/church-image.jpg') center/cover no-repeat;
+        }
+        
+        [data-theme="dark"] .welcome-card,
+        [data-theme="dark"] .service-card,
+        [data-theme="dark"] .ministry-card,
+        [data-theme="dark"] .event-card,
+        [data-theme="dark"] .sermon-card,
+        [data-theme="dark"] .testimonial-card,
+        [data-theme="dark"] .giving-card,
+        [data-theme="dark"] .contact-form-card,
+        [data-theme="dark"] .stat-card {
+            background: var(--dark-card);
+        }
+        
+        [data-theme="dark"] .pastor-name,
+        [data-theme="dark"] .service-day,
+        [data-theme="dark"] .ministry-content h4,
+        [data-theme="dark"] .event-content h4,
+        [data-theme="dark"] .event-category,
+        [data-theme="dark"] .sermon-content h4,
+        [data-theme="dark"] .testimonial-name,
+        [data-theme="dark"] .giving-card h4,
+        [data-theme="dark"] .section-title,
+        [data-theme="dark"] .contact-form-card h3 {
+            color: var(--dark-text);
+        }
+        
+        [data-theme="dark"] .pastor-title,
+        [data-theme="dark"] .service-time,
+        [data-theme="dark"] .ministry-content p,
+        [data-theme="dark"] .event-meta-item,
+        [data-theme="dark"] .event-content p,
+        [data-theme="dark"] .sermon-date,
+        [data-theme="dark"] .testimonial-text,
+        [data-theme="dark"] .testimonial-role,
+        [data-theme="dark"] .giving-card p,
+        [data-theme="dark"] .about-content p,
+        [data-theme="dark"] .service-desc,
+        [data-theme="dark"] .stat-label,
+        [data-theme="dark"] .section-subtitle {
+            color: var(--dark-text-secondary);
+        }
+        
+        [data-theme="dark"] .form-control {
+            background: var(--dark-bg);
+            border-color: var(--dark-border);
+            color: var(--dark-text);
+        }
+        
+        [data-theme="dark"] .footer {
+            background: #0a0a0f;
+        }
+        
+        [data-theme="dark"] .footer-brand p,
+        [data-theme="dark"] .footer-links a,
+        [data-theme="dark"] .footer-bottom {
+            color: var(--dark-text-secondary);
+        }
+        
+        [data-theme="dark"] .footer-title {
+            color: var(--dark-text);
+        }
+        
+        [data-theme="dark"] .map-container {
+            background: var(--dark-card);
+        }
+        
+        .dark-mode-toggle {
+            background: transparent;
+            border: 2px solid var(--white);
+            border-radius: 50px;
+            padding: 8px 15px;
+            color: var(--white);
+            cursor: pointer;
+            margin-left: 10px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .dark-mode-toggle:hover {
+            background: var(--white);
+            color: var(--primary);
+        }
+        
+        [data-theme="dark"] .dark-mode-toggle {
+            border-color: var(--dark-text);
+            color: var(--dark-text);
+        }
+        
+        [data-theme="dark"] .dark-mode-toggle:hover {
+            background: var(--dark-text);
+            color: var(--dark-bg);
+        }
+        
+        [data-theme="dark"] .scroll-indicator a {
+            color: var(--dark-text);
+        }
     </style>
 </head>
 <body>
@@ -282,6 +414,10 @@
                     <li class="nav-item"><a class="nav-link" href="#sermons">Sermons</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
                 </ul>
+                <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                    <span>Dark</span>
+                </button>
                 <a href="#giving" class="btn btn-nav">Give Online</a>
             </div>
         </div>
@@ -956,6 +1092,35 @@
     
     <script>
         AOS.init({ duration: 800, once: true, offset: 100 });
+        
+        // Dark Mode Toggle
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const icon = darkModeToggle.querySelector('i');
+        const text = darkModeToggle.querySelector('span');
+        
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            icon.classList.replace('fa-moon', 'fa-sun');
+            text.textContent = 'Light';
+        }
+        
+        darkModeToggle.addEventListener('click', function() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            
+            if (currentTheme === 'dark') {
+                document.documentElement.removeAttribute('data-theme');
+                icon.classList.replace('fa-sun', 'fa-moon');
+                text.textContent = 'Dark';
+                localStorage.setItem('theme', 'light');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                icon.classList.replace('fa-moon', 'fa-sun');
+                text.textContent = 'Light';
+                localStorage.setItem('theme', 'dark');
+            }
+        });
         
         window.addEventListener('scroll', function() {
             const navbar = document.getElementById('mainNav');
