@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: laver-ministries
+    env: static
+    buildCommand: ""
+    staticPublishPath: .
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: public, max-age=0, must-revalidate
+    rewrites:
+      - source: /
+        destination: /index.html
