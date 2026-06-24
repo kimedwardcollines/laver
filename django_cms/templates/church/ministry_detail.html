@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Page Hero -->
+<section class="page-hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h1>{{ ministry.name }}</h1>
+        <p>{{ ministry.description|striptags|truncatewords:20 }}</p>
+    </div>
+</section>
+
+<!-- Ministry Detail Section -->
+<section class="ministry-detail">
+    <div class="container">
+        <div class="ministry-detail-content">
+            <div class="ministry-detail-header">
+                <div class="ministry-icon-lg"><i class="fas {{ ministry.icon|default:'fa-church' }}"></i></div>
+                <div class="ministry-detail-info">
+                    <h2>{{ ministry.name }}</h2>
+                    {% if ministry.leader %}
+                    <p class="ministry-leader-badge"><i class="fas fa-user"></i> Led by {{ ministry.leader.name }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="ministry-description">
+                {{ ministry.description|safe }}
+            </div>
+            
+            <div class="ministry-actions">
+                <a href="{% url 'contact' %}" class="btn btn-primary btn-lg"><i class="fas fa-envelope"></i> Get Involved</a>
+                <a href="{% url 'ministries' %}" class="btn btn-outline btn-lg"><i class="fas fa-arrow-left"></i> Back to Ministries</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="ministry-cta">
+    <div class="container">
+        <h2>Join Our Ministry</h2>
+        <p>We'd love to have you as part of our {{ ministry.name }}. Contact us today to learn more!</p>
+        <a href="{% url 'contact' %}" class="btn btn-primary btn-lg"><i class="fas fa-envelope"></i> Contact Us</a>
+    </div>
+</section>
+{% endblock %}

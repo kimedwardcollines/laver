@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Page Hero -->
+<section class="page-hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h1>{{ sermon.title }}</h1>
+        <p>{{ sermon.speaker }} | {{ sermon.date_preached|date:"F d, Y" }}</p>
+    </div>
+</section>
+
+<!-- Sermon Detail Section -->
+<section class="sermon-detail">
+    <div class="container">
+        <div class="sermon-detail-grid">
+            <!-- Main Content -->
+            <div class="sermon-main">
+                <div class="sermon-video-container">
+                    {% if sermon.video_url %}
+                    <div class="video-wrapper">
+                        <iframe src="{{ sermon.video_url }}" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    {% else %}
+                    <div class="video-placeholder">
+                        <i class="fas fa-play-circle"></i>
+                        <p>Video not available</p>
+                    </div>
+                    {% endif %}
+                </div>
+                
+                <div class="sermon-info">
+                    <h2>{{ sermon.title }}</h2>
+                    <div class="sermon-meta">
+                        <span><i class="far fa-calendar"></i> {{ sermon.date_preached|date:"F d, Y" }}</span>
+                        <span><i class="fas fa-user"></i> {{ sermon.speaker }}</span>
+                    </div>
+                    
+                    {% if sermon.description %}
+                    <div class="sermon-description">
+                        <h3>Description</h3>
+                        {{ sermon.description|safe }}
+                    </div>
+                    {% endif %}
+                    
+                    {% if sermon.sermon_notes %}
+                    <div class="sermon-notes">
+                        <h3><i class="fas fa-book-open"></i> Sermon Notes</h3>
+                        {{ sermon.sermon_notes|safe }}
+                    </div>
+                    {% endif %}
+                    
+                    <!-- Audio Player -->
+                    {% if sermon.audio_url %}
+                    <div class="sermon-audio">
+                        <h3><i class="fas fa-headphones"></i> Listen to Audio</h3>
+                        <audio controls>
+                            <source src="{{ sermon.audio_url }}" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                        <a href="{{ sermon.audio_url }}" class="btn btn-outline mt-3" download><i class="fas fa-download"></i> Download Audio</a>
+                    </div>
+                    {% endif %}
+                    
+                    <!-- Share -->
+                    <div class="sermon-share">
+                        <h4>Share This Sermon</h4>
+                        <div class="share-buttons">
+                            {% if sermon.video_url %}
+                            <a href="{{ sermon.video_url }}" target="_blank" class="btn btn-sm btn-outline"><i class="fab fa-youtube"></i> Watch on YouTube</a>
+                            {% endif %}
+                            <a href="{% url 'sermon_detail' sermon.slug %}?share=true" class="btn btn-sm btn-outline"><i class="fas fa-link"></i> Copy Link</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sidebar -->
+            <aside class="sermon-sidebar">
+                <!-- Related Sermons -->
+                {% if related_sermons %}
+                <div class="related-sermons">
+                    <h3>More Sermons</h3>
+                    {% for related in related_sermons %}
+                    <div class="related-sermon-card">
+                        <div class="related-sermon-date">{{ related.date_preached|date:"M d" }}</div>
+                        <div class="related-sermon-info">
+                            <h4><a href="{% url 'sermon_detail' related.slug %}">{{ related.title }}</a></h4>
+                            <p>{{ related.speaker }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                
+                <!-- Back to Sermons -->
+                <div class="back-to-sermons">
+                    <a href="{% url 'sermons' %}" class="btn btn-primary btn-block"><i class="fas fa-list"></i> All Sermons</a>
+                </div>
+            </aside>
+        </div>
+    </div>
+</section>
+{% endblock %}

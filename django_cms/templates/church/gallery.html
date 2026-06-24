@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Page Hero -->
+<section class="page-hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h1>Photo Gallery</h1>
+        <p>Capturing moments of worship, fellowship, and transformation</p>
+    </div>
+</section>
+
+<!-- Gallery Section -->
+<section class="gallery-page">
+    <div class="container">
+        <div class="section-intro">
+            <p>Explore moments from our church community - worship services, community outreach, youth programs, and special celebrations that glorify God.</p>
+        </div>
+
+        <!-- Filters -->
+        <div class="gallery-filters">
+            <a href="#" class="filter-btn active">All</a>
+            <a href="#" class="filter-btn">Worship</a>
+            <a href="#" class="filter-btn">Outreach</a>
+            <a href="#" class="filter-btn">Youth</a>
+            <a href="#" class="filter-btn">Special Events</a>
+        </div>
+
+        <!-- Gallery Grid -->
+        <div class="gallery-grid">
+            {% for image in images %}
+            <div class="gallery-item">
+                <img src="{{ image.image.url }}" alt="{{ image.title|default:'Gallery Image' }}" loading="lazy">
+                <div class="overlay">
+                    <h4>{{ image.title|default:'Gallery Image' }}</h4>
+                    {% if image.caption %}
+                    <p>{{ image.caption }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            {% empty %}
+            <!-- Default gallery items -->
+            <div class="gallery-item">
+                <img src="{% static 'src/church-image.jpg' %}" alt="Sunday Worship Service" loading="lazy">
+                <div class="overlay">
+                    <h4>Sunday Worship Service</h4>
+                    <p>Regular Sunday Service</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="{% static 'src/church-image.jpg' %}" alt="Youth Fellowship" loading="lazy">
+                <div class="overlay">
+                    <h4>Youth Fellowship</h4>
+                    <p>Weekly Youth Service</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="{% static 'src/church-image.jpg' %}" alt="Community Outreach" loading="lazy">
+                <div class="overlay">
+                    <h4>Community Outreach</h4>
+                    <p>Serving Our Community</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="{% static 'src/church-image.jpg' %}" alt="Worship Team" loading="lazy">
+                <div class="overlay">
+                    <h4>Worship Team</h4>
+                    <p>Praising Through Music</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="{% static 'src/church-image.jpg' %}" alt="Bible Study" loading="lazy">
+                <div class="overlay">
+                    <h4>Bible Study</h4>
+                    <p>Midweek Bible Study</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="{% static 'src/church-image.jpg' %}" alt="Prayer Meeting" loading="lazy">
+                <div class="overlay">
+                    <h4>Prayer Meeting</h4>
+                    <p>United in Prayer</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="{% static 'src/church-image.jpg' %}" alt="Special Service" loading="lazy">
+                <div class="overlay">
+                    <h4>Special Service</h4>
+                    <p>Thanksgiving Celebration</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="{% static 'src/church-image.jpg' %}" alt="Children's Ministry" loading="lazy">
+                <div class="overlay">
+                    <h4>Children's Ministry</h4>
+                    <p>Teaching the Next Generation</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="{% static 'src/church-image.jpg' %}" alt="Church Fellowship" loading="lazy">
+                <div class="overlay">
+                    <h4>Church Fellowship</h4>
+                    <p>Breaking Bread Together</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="{% static 'src/church-image.jpg' %}" alt="Health Camp" loading="lazy">
+                <div class="overlay">
+                    <h4>Health Camp</h4>
+                    <p>Community Health Outreach</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="{% static 'src/church-image.jpg' %}" alt="Choir Performance" loading="lazy">
+                <div class="overlay">
+                    <h4>Choir Performance</h4>
+                    <p>Praising Through Song</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="{% static 'src/church-image.jpg' %}" alt="Church Building" loading="lazy">
+                <div class="overlay">
+                    <h4>Our Church</h4>
+                    <p>Laver Transformation Ministries</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Submit Photos CTA -->
+        <div class="submit-photos">
+            <h3><i class="fas fa-camera"></i> Share Your Photos</h3>
+            <p>Have photos from church events? Share them with us to be featured in our gallery!</p>
+            <a href="{% url 'contact' %}" class="btn btn-primary">Submit Photos</a>
+        </div>
+    </div>
+</section>
+
+{% block extra_js %}
+<script>
+    // Simple gallery filter
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        });
+    });
+
+    // Simple lightbox effect for gallery items
+    document.querySelectorAll('.gallery-item').forEach(item => {
+        item.addEventListener('click', () => {
+            const img = item.querySelector('img');
+            const overlay = document.createElement('div');
+            overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);z-index:9999;display:flex;align-items:center;justify-content:center;cursor:pointer;';
+            overlay.innerHTML = `<img src="${img.src}" style="max-width:90%;max-height:90%;border-radius:8px;">`;
+            overlay.addEventListener('click', () => overlay.remove());
+            document.body.appendChild(overlay);
+        });
+    });
+</script>
+{% endblock %}
+{% endblock %}

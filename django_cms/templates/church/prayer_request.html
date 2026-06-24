@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Page Hero -->
+<section class="page-hero prayer-hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h1>Prayer Request</h1>
+        <p>"The prayer of a righteous person is powerful and effective." - James 5:16</p>
+    </div>
+</section>
+
+<!-- Prayer Request Section -->
+<section class="prayer-section">
+    <div class="container">
+        <div class="prayer-content">
+            <div class="prayer-intro">
+                <h2><i class="fas fa-pray"></i> We're Here to Pray With You</h2>
+                <p>Whatever you're going through, you don't have to face it alone. Our prayer team at Laver Transformation Ministries is committed to lifting your needs before our loving Father. Share your prayer request below, and know that you are covered in prayer.</p>
+                <p>Your request will be treated with confidentiality and respect. Our intercessors will hold your needs up in prayer with faith and love.</p>
+            </div>
+
+            <div class="prayer-form-container">
+                <form method="POST" action="{% url 'prayer_request' %}" class="prayer-form">
+                    {% csrf_token %}
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="name">Your Name *</label>
+                            <input type="text" id="name" name="name" required placeholder="Enter your name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" placeholder="your.email@example.com">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+256 XXX XXX XXX">
+                    </div>
+                    <div class="form-group">
+                        <label for="request">Your Prayer Request *</label>
+                        <textarea id="request" name="request" rows="6" required placeholder="Share what you'd like us to pray for..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <i class="fas fa-pray"></i> Submit Prayer Request
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Scripture Section -->
+<section class="scripture-section">
+    <div class="container">
+        <div class="scripture-cards">
+            <div class="scripture-card">
+                <div class="scripture-icon"><i class="fas fa-bible"></i></div>
+                <blockquote>
+                    "Therefore confess your sins to each other and pray for each other so that you may be healed. The prayer of a righteous person is powerful and effective."
+                </blockquote>
+                <cite>— James 5:16</cite>
+            </div>
+            <div class="scripture-card">
+                <div class="scripture-icon"><i class="fas fa-hands-praying"></i></div>
+                <blockquote>
+                    "Cast all your anxiety on him because he cares for you."
+                </blockquote>
+                <cite>— 1 Peter 5:7</cite>
+            </div>
+            <div class="scripture-card">
+                <div class="scripture-icon"><i class="fas fa-dove"></i></div>
+                <blockquote>
+                    "The Lord is close to the brokenhearted and saves those who are crushed in spirit."
+                </blockquote>
+                <cite>— Psalm 34:18</cite>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Prayer Times Section -->
+<section class="prayer-times-section">
+    <div class="container">
+        <h2><i class="fas fa-clock"></i> Join Us for Prayer</h2>
+        <p>We meet regularly to pray together. You're welcome to join us!</p>
+        <div class="prayer-meetings">
+            <div class="prayer-meeting">
+                <div class="meeting-icon"><i class="fas fa-calendar-day"></i></div>
+                <h3>Friday Prayer Meeting</h3>
+                <p class="meeting-time">Friday, 6:00 PM</p>
+                <p class="meeting-location">Main Sanctuary</p>
+            </div>
+            <div class="prayer-meeting">
+                <div class="meeting-icon"><i class="fas fa-sun"></i></div>
+                <h3>Morning Prayer</h3>
+                <p class="meeting-time">Daily, 6:00 AM - 7:00 AM</p>
+                <p class="meeting-location">Prayer Room</p>
+            </div>
+            <div class="prayer-meeting">
+                <div class="meeting-icon"><i class="fas fa-bible"></i></div>
+                <h3>Bible Study & Prayer</h3>
+                <p class="meeting-time">Wednesday, 7:00 PM</p>
+                <p class="meeting-location">Main Sanctuary</p>
+            </div>
+        </div>
+        <a href="{% url 'contact' %}" class="btn btn-outline"><i class="fas fa-phone"></i> Contact Us for More Info</a>
+    </div>
+</section>
+{% endblock %}

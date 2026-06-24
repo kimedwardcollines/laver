@@ -1,0 +1,193 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Page Hero -->
+<section class="page-hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h1>About Us</h1>
+        <p>Our story, mission, and the people behind Laver Transformation Ministries</p>
+    </div>
+</section>
+
+<!-- Our Story Section -->
+<section class="about-section">
+    <div class="container">
+        <div class="about-intro">
+            <h2><i class="fas fa-book-open"></i> Our Story</h2>
+            {% if church and church.history %}
+            <p>{{ church.history|safe }}</p>
+            {% else %}
+            <p>Laver Transformation Ministries was established with a clear vision: to be a beacon of hope and transformation in the Wamala community. What started as a small gathering of believers has grown into a vibrant community dedicated to spreading God's love and transforming lives through the power of His Word.</p>
+            <p>Located along Wamala Katoke Road, our church has become a spiritual home for families, youth, and individuals seeking a deeper relationship with God. We believe in the power of community, worship, and service to bring about lasting transformation in people's lives.</p>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<!-- Mission & Vision Section -->
+<section class="mission-vision">
+    <div class="container">
+        <div class="mv-grid">
+            <div class="mv-card">
+                <div class="mv-icon"><i class="fas fa-cross"></i></div>
+                <h3>Our Mission</h3>
+                {% if church and church.mission %}
+                <p>{{ church.mission|safe }}</p>
+                {% else %}
+                <p>To transform lives through the power of God's Word, creating a community where people from all walks of life can experience spiritual growth, find purpose, and discover their God-given potential.</p>
+                {% endif %}
+            </div>
+            <div class="mv-card">
+                <div class="mv-icon"><i class="fas fa-eye"></i></div>
+                <h3>Our Vision</h3>
+                {% if church and church.vision %}
+                <p>{{ church.vision|safe }}</p>
+                {% else %}
+                <p>To be a leading force for positive change in Wamala and beyond, raising up generations of believers who are rooted in faith, equipped for service, and committed to making a difference in their communities.</p>
+                {% endif %}
+            </div>
+            <div class="mv-card">
+                <div class="mv-icon"><i class="fas fa-heart"></i></div>
+                <h3>Our Values</h3>
+                <ul class="values-list">
+                    <li><i class="fas fa-check"></i> Biblical Foundation</li>
+                    <li><i class="fas fa-check"></i> Community & Fellowship</li>
+                    <li><i class="fas fa-check"></i> Servant Leadership</li>
+                    <li><i class="fas fa-check"></i> Continuous Growth</li>
+                    <li><i class="fas fa-check"></i> Authentic Worship</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Core Beliefs Section -->
+<section class="beliefs-section">
+    <div class="container">
+        <h2><i class="fas fa-praying-hands"></i> What We Believe</h2>
+        <div class="beliefs-grid">
+            <div class="belief-item">
+                <h4>The Bible</h4>
+                <p>We believe the Bible is the inspired, infallible Word of God and the ultimate authority for faith and practice.</p>
+            </div>
+            <div class="belief-item">
+                <h4>Trinity</h4>
+                <p>We believe in one God, existing in three persons: Father, Son (Jesus Christ), and Holy Spirit.</p>
+            </div>
+            <div class="belief-item">
+                <h4>Salvation</h4>
+                <p>We believe salvation comes through faith in Jesus Christ, who died for our sins and rose again.</p>
+            </div>
+            <div class="belief-item">
+                <h4>Transformation</h4>
+                <p>We believe God is actively transforming lives today through the Holy Spirit's power.</p>
+            </div>
+            <div class="belief-item">
+                <h4>The Church</h4>
+                <p>We believe the church is the body of Christ, called to worship, fellowship, and serve together.</p>
+            </div>
+            <div class="belief-item">
+                <h4>Eternity</h4>
+                <p>We believe in eternal life for believers and the return of Jesus Christ to establish His kingdom.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Leadership Section -->
+{% if leadership %}
+<section class="leadership-section">
+    <div class="container">
+        <h2><i class="fas fa-users"></i> Our Leadership Team</h2>
+        <div class="leadership-grid">
+            {% for leader in leadership %}
+            <div class="leader-card">
+                <div class="leader-image">
+                    {% if leader.photo %}
+                    <img src="{{ leader.photo.url }}" alt="{{ leader.name }}">
+                    {% else %}
+                    <i class="fas fa-user"></i>
+                    {% endif %}
+                </div>
+                <h3>{{ leader.name }}</h3>
+                <p class="leader-title">{{ leader.position }}</p>
+                {% if leader.bio %}
+                <p class="leader-bio">{{ leader.bio|safe }}</p>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Location Section -->
+<section class="location-section">
+    <div class="container">
+        <h2><i class="fas fa-map-marker-alt"></i> Find Us</h2>
+        <div class="location-content">
+            <div class="location-info">
+                <h3>{% if church %}{{ church.name }}{% else %}Laver Transformation Ministries{% endif %}</h3>
+                {% if church and church.address %}
+                <p><i class="fas fa-map-pin"></i> {{ church.address }}</p>
+                {% else %}
+                <p><i class="fas fa-map-pin"></i> Wamala, along Wamala Katoke Road</p>
+                {% endif %}
+                <p><i class="fas fa-globe"></i> Central Uganda</p>
+                
+                <h4>Service Times</h4>
+                <ul class="service-times-list">
+                    {% for st in service_times %}
+                    <li><strong>{{ st.name }}:</strong> {{ st.day }} {{ st.time }}</li>
+                    {% empty %}
+                    <li><strong>Sunday Service:</strong> 9:00 AM</li>
+                    <li><strong>Youth Service:</strong> 2:00 PM</li>
+                    <li><strong>Bible Study:</strong> Wednesday 7:00 PM</li>
+                    <li><strong>Prayer Meeting:</strong> Friday 6:00 PM</li>
+                    {% endfor %}
+                </ul>
+                
+                <a href="{% url 'contact' %}" class="btn btn-primary"><i class="fas fa-envelope"></i> Contact Us</a>
+            </div>
+            <div class="location-map">
+                <div class="map-placeholder">
+                    <i class="fas fa-map"></i>
+                    <p>Wamala, Uganda</p>
+                    <p class="map-note">Located along Wamala Katoke Road</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+{% if testimonials %}
+<section class="testimonials-section">
+    <div class="container">
+        <h2><i class="fas fa-comment"></i> What People Are Saying</h2>
+        <div class="testimonials-grid">
+            {% for testimonial in testimonials %}
+            <div class="testimonial-item">
+                <i class="fas fa-quote-left quote-icon"></i>
+                <p>"{{ testimonial.testimony }}"</p>
+                <cite>- {{ testimonial.name }}</cite>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- CTA Section -->
+<section class="about-cta">
+    <div class="container">
+        <h2>Join Our Family</h2>
+        <p>Whether you're a first-time visitor or looking for a church home, we'd love to welcome you!</p>
+        <div class="cta-buttons">
+            <a href="{% url 'events' %}" class="btn btn-primary"><i class="fas fa-calendar"></i> View Upcoming Events</a>
+            <a href="{% url 'contact' %}" class="btn btn-outline"><i class="fas fa-envelope"></i> Get in Touch</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Page Hero -->
+<section class="page-hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h1>Partner With Us</h1>
+        <p>Join us in spreading the Gospel through your generous giving</p>
+    </div>
+</section>
+
+<!-- Give Section -->
+<section class="give-page">
+    <div class="container">
+        <div class="section-intro">
+            <p>Thank you for considering partnering with Laver Transformation Ministries. Your generous giving helps us continue our mission of transforming lives through God's Word and serving our community in Wamala.</p>
+        </div>
+
+        <!-- Bible Quote -->
+        <div class="bible-quote">
+            <blockquote>"Each of you should give what you have decided in your heart to give, not reluctantly or under compulsion, for God loves a cheerful giver."</blockquote>
+            <cite>— 2 Corinthians 9:7 (NIV)</cite>
+        </div>
+
+        <!-- Giving Options -->
+        <h2 style="text-align:center; margin: 40px 0 20px;">Ways to Give</h2>
+        <div class="giving-options">
+            <div class="giving-card">
+                <i class="fas fa-hand-holding-heart"></i>
+                <h3>Tithes & Offerings</h3>
+                <p>Support the general operations of the church including worship, pastoral care, and community programs.</p>
+                <span class="giving-purpose">General Operations</span>
+            </div>
+
+            <div class="giving-card">
+                <i class="fas fa-building"></i>
+                <h3>Building Fund</h3>
+                <p>Help us expand our facilities to better serve our growing congregation and community.</p>
+                <span class="giving-purpose">Facility Expansion</span>
+            </div>
+
+            <div class="giving-card">
+                <i class="fas fa-globe-africa"></i>
+                <h3>Missions</h3>
+                <p>Support our missionary work locally and abroad, bringing the Gospel to unreached areas.</p>
+                <span class="giving-purpose">Local & Global Missions</span>
+            </div>
+
+            <div class="giving-card">
+                <i class="fas fa-graduation-cap"></i>
+                <h3>Youth & Education</h3>
+                <p>Fund youth programs, scholarships, and Christian education initiatives for children and teens.</p>
+                <span class="giving-purpose">Next Generation</span>
+            </div>
+
+            <div class="giving-card">
+                <i class="fas fa-heartbeat"></i>
+                <h3>Community Outreach</h3>
+                <p>Support our health camps, food drives, and community development programs.</p>
+                <span class="giving-purpose">Serving Others</span>
+            </div>
+
+            <div class="giving-card">
+                <i class="fas fa-seedling"></i>
+                <h3>Benevolence Fund</h3>
+                <p>Help families in our congregation and community who are facing financial hardship.</p>
+                <span class="giving-purpose">Emergency Assistance</span>
+            </div>
+        </div>
+
+        {% if giving_info %}
+        <!-- Bank Details -->
+        <div class="bank-details">
+            <h3><i class="fas fa-university"></i> Bank Transfer Details</h3>
+            {% if giving_info.description %}
+            <p>{{ giving_info.description|safe }}</p>
+            {% endif %}
+            {% if giving_info.bank_name or giving_info.account_number or giving_info.account_name %}
+            <div class="bank-info">
+                {% if giving_info.bank_name %}
+                <div class="bank-item">
+                    <span class="bank-label">Bank Name:</span>
+                    <span class="bank-value">{{ giving_info.bank_name }}</span>
+                </div>
+                {% endif %}
+                {% if giving_info.account_name %}
+                <div class="bank-item">
+                    <span class="bank-label">Account Name:</span>
+                    <span class="bank-value">{{ giving_info.account_name }}</span>
+                </div>
+                {% endif %}
+                {% if giving_info.account_number %}
+                <div class="bank-item">
+                    <span class="bank-label">Account Number:</span>
+                    <span class="bank-value">{{ giving_info.account_number }}</span>
+                </div>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        <!-- Mobile Money -->
+        <div class="bank-details">
+            <h3><i class="fas fa-mobile-alt"></i> Mobile Money</h3>
+            <div class="bank-info">
+                {% if giving_info.mtn_mobile %}
+                <div class="bank-item">
+                    <span class="bank-label">MTN MoMo:</span>
+                    <span class="bank-value">{{ giving_info.mtn_mobile }}</span>
+                </div>
+                {% else %}
+                <div class="bank-item">
+                    <span class="bank-label">MTN MoMo:</span>
+                    <span class="bank-value">Contact us for details</span>
+                </div>
+                {% endif %}
+                {% if giving_info.airtel_mobile %}
+                <div class="bank-item">
+                    <span class="bank-label">Airtel Money:</span>
+                    <span class="bank-value">{{ giving_info.airtel_mobile }}</span>
+                </div>
+                {% else %}
+                <div class="bank-item">
+                    <span class="bank-label">Airtel Money:</span>
+                    <span class="bank-value">Contact us for details</span>
+                </div>
+                {% endif %}
+            </div>
+            <p style="margin-top:15px; font-size:0.9rem; color:#666;"><em>Please include your name in the reference/memo field when making transfers.</em></p>
+        </div>
+
+        <!-- Contact for Questions -->
+        <div style="text-align:center; padding: 40px 0;">
+            <h3>Questions About Giving?</h3>
+            <p>Our church office is happy to assist you with any questions about giving or to provide receipts for tax purposes.</p>
+            <a href="{% url 'contact' %}" class="btn btn-primary" style="margin-top: 20px;">
+                <i class="fas fa-envelope"></i> Contact Us
+            </a>
+        </div>
+
+        <!-- Disclaimer -->
+        <div style="background: #fff3cd; padding: 20px; border-radius: 8px; margin: 30px 0;">
+            <p style="margin: 0; font-size: 0.9rem; color: #856404;">
+                <i class="fas fa-info-circle"></i> <strong>Note:</strong> Laver Transformation Ministries is a registered non-profit organization. For tax-deductible receipts or if you require documentation for your contributions, please contact our office. Always consult with a financial advisor for major giving decisions.
+            </p>
+        </div>
+    </div>
+</section>
+{% endblock %}

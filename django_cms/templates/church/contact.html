@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Page Hero -->
+<section class="page-hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h1>Contact Us</h1>
+        <p>We'd love to hear from you. Reach out anytime!</p>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact-section">
+    <div class="container">
+        <div class="contact-grid">
+            <!-- Contact Info -->
+            <div class="contact-info-card">
+                <h2>Get in Touch</h2>
+                <p>Whether you have a question, prayer request, or just want to say hello, we're here for you. Fill out the form and we'll get back to you as soon as possible.</p>
+                
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Location</h4>
+                            <p>{% if church and church.address %}{{ church.address }}{% else %}Wamala, along Wamala Katoke Road<br>Central Uganda{% endif %}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Phone</h4>
+                            <p>{% if church and church.phone %}{{ church.phone }}{% if church.phone_2 %}, {{ church.phone_2 }}{% endif %}{% else %}+256 XXX XXX XXX{% endif %}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Email</h4>
+                            <p>{% if church and church.email %}{{ church.email }}{% else %}info@lavertransformation.org{% endif %}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Office Hours</h4>
+                            <p>Monday - Friday: 8:00 AM - 5:00 PM<br>Saturday: 9:00 AM - 12:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="social-connect">
+                    <h4>Connect With Us</h4>
+                    <div class="social-icons">
+                        {% if church.facebook %}
+                        <a href="{{ church.facebook }}" target="_blank" class="social-icon"><i class="fab fa-facebook"></i></a>
+                        {% endif %}
+                        {% if church.instagram %}
+                        <a href="{{ church.instagram }}" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        {% endif %}
+                        {% if church.youtube %}
+                        <a href="{{ church.youtube }}" target="_blank" class="social-icon"><i class="fab fa-youtube"></i></a>
+                        {% endif %}
+                        {% if church.whatsapp %}
+                        <a href="{{ church.whatsapp }}" target="_blank" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="contact-form-card">
+                <h3>Send Us a Message</h3>
+                <form method="POST" action="{% url 'contact' %}" class="contact-form">
+                    {% csrf_token %}
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="name">Your Name *</label>
+                            <input type="text" id="name" name="name" required placeholder="Your full name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+256 XXX XXX XXX">
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" placeholder="Subject of your message">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message *</label>
+                        <textarea id="message" name="message" rows="5" required placeholder="How can we help you?"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Quick Links Section -->
+<section class="quick-links-section">
+    <div class="container">
+        <h2>Quick Links</h2>
+        <div class="quick-links-grid">
+            <a href="{% url 'prayer_request' %}" class="quick-link-card">
+                <i class="fas fa-pray"></i>
+                <h4>Prayer Request</h4>
+                <p>Submit a prayer request</p>
+            </a>
+            <a href="{% url 'events' %}" class="quick-link-card">
+                <i class="fas fa-calendar-alt"></i>
+                <h4>Events</h4>
+                <p>View upcoming events</p>
+            </a>
+            <a href="{% url 'sermons' %}" class="quick-link-card">
+                <i class="fas fa-video"></i>
+                <h4>Sermons</h4>
+                <p>Watch past sermons</p>
+            </a>
+            <a href="{% url 'give' %}" class="quick-link-card">
+                <i class="fas fa-hand-holding-heart"></i>
+                <h4>Give</h4>
+                <p>Support our ministry</p>
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,133 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{% block meta_description %}Laver Transformation Ministries - A place of spiritual growth and transformation in Wamala, Uganda{% endblock %}">
+    <title>{% block title %}{% if church %}{{ church.name }}{% else %}Laver Transformation Ministries{% endif %}{% endblock %}</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛪</text></svg>">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Navigation -->
+    <header class="nav-container">
+        <nav class="nav" id="main-nav">
+            <a href="{% url 'home' %}" class="logo">
+                <i class="fas fa-church logo-icon"></i>
+                <span class="logo-text">{% if church %}{{ church.name|default:"Laver Ministries" }}{% else %}Laver Ministries{% endif %}</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+                <li><a href="{% url 'ministries' %}">Ministries</a></li>
+                <li><a href="{% url 'sermons' %}">Sermons</a></li>
+                <li><a href="{% url 'events' %}">Events</a></li>
+                <li><a href="{% url 'gallery' %}">Gallery</a></li>
+                <li><a href="{% url 'give' %}">Give</a></li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+            </ul>
+            <button class="mobile-menu" aria-label="Toggle Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Announcements Bar -->
+    {% if announcements %}
+    <div class="announcement-bar">
+        <div class="container">
+            <div class="marquee">
+                {% for announcement in announcements %}
+                <span>{{ announcement.title }}</span>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Main Content -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <h3>{% if church %}{{ church.name }}{% else %}Laver Transformation Ministries{% endif %}</h3>
+                    <p>{% if church %}{{ church.address }}{% endif %}</p>
+                    <p><i class="fas fa-phone me-2"></i>{% if church %}{{ church.phone }}{% endif %}</p>
+                    <p><i class="fas fa-envelope me-2"></i>{% if church %}{{ church.email }}{% endif %}</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        <li><a href="{% url 'about' %}">About Us</a></li>
+                        <li><a href="{% url 'ministries' %}">Ministries</a></li>
+                        <li><a href="{% url 'sermons' %}">Sermons</a></li>
+                        <li><a href="{% url 'events' %}">Events</a></li>
+                        <li><a href="{% url 'contact' %}">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="service-times">
+                    <h4>Service Times</h4>
+                    <ul>
+                        {% for st in service_times %}
+                        <li>{{ st.name }}: {{ st.day }} {{ st.time }}</li>
+                        {% empty %}
+                        <li>Sunday Service: 9:00 AM</li>
+                        <li>Bible Study: Wed 7:00 PM</li>
+                        <li>Prayer Meeting: Fri 6:00 PM</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        {% if church.facebook %}<a href="{{ church.facebook }}" target="_blank"><i class="fab fa-facebook"></i></a>{% endif %}
+                        {% if church.instagram %}<a href="{{ church.instagram }}" target="_blank"><i class="fab fa-instagram"></i></a>{% endif %}
+                        {% if church.youtube %}<a href="{{ church.youtube }}" target="_blank"><i class="fab fa-youtube"></i></a>{% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; {% now "Y" %} {% if church %}{{ church.name }}{% else %}Laver Transformation Ministries{% endif %}. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'src/assets/js/nav-script.js' %}"></script>
+    <script src="{% static 'src/assets/js/mobile-menu.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+    
+    {% if messages %}
+    <script>
+        {% for message in messages %}
+        alert("{{ message }}");
+        {% endfor %}
+    </script>
+    {% endif %}
+</body>
+</html>

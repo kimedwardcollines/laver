@@ -1,0 +1,273 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero" id="home">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="hero-content">
+                    <span class="hero-badge">Welcome to Laver Transformation Ministries</span>
+                    <h1>Transforming Lives Through <span>God's Word</span></h1>
+                    <p class="hero-text">A vibrant community of believers in Wamala, Uganda, dedicated to spiritual growth, fellowship, and making a lasting impact in our community through faith.</p>
+
+                    <div class="hero-buttons">
+                        <a href="{% url 'contact' %}" class="btn btn-primary-custom"><i class="fas fa-calendar-check me-2"></i>Plan Your Visit</a>
+                        <a href="{% url 'sermons' %}" class="btn btn-outline-custom"><i class="fas fa-play me-2"></i>Watch Sermons</a>
+                        <a href="{% url 'give' %}" class="btn btn-outline-custom"><i class="fas fa-heart me-2"></i>Give Online</a>
+                    </div>
+
+                    <div class="hero-service-times">
+                        <div class="service-time-item">
+                            <i class="fas fa-sun"></i>
+                            <div><strong>Sunday Service</strong><span>9:00 AM</span></div>
+                        </div>
+                        <div class="service-time-item">
+                            <i class="fas fa-users"></i>
+                            <div><strong>Youth Service</strong><span>2:00 PM</span></div>
+                        </div>
+                        <div class="service-time-item">
+                            <i class="fas fa-bible"></i>
+                            <div><strong>Bible Study</strong><span>Wed 7:00 PM</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="scroll-indicator">
+        <a href="#welcome"><i class="fas fa-chevron-down"></i></a>
+    </div>
+</section>
+
+<!-- Welcome Section -->
+<section class="section" id="welcome">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="welcome-card">
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="pastor-image"><i class="fas fa-user"></i></div>
+                        <div class="ms-4">
+                            <h4 class="pastor-name mb-0">{% if church %}{{ church.senior_pastor_name }}{% else %}Pastor Milly Nankabirwa{% endif %}</h4>
+                            <span class="pastor-title">{% if church %}{{ church.senior_pastor_title }}{% else %}Senior Pastor{% endif %}</span>
+                        </div>
+                    </div>
+                    <p class="lead text-primary fst-italic mb-4">"Welcome to a place where lives are transformed through the power of God's Word."</p>
+                    {% if church and church.welcome_message %}{{ church.welcome_message|safe }}{% else %}
+                    <p>On behalf of our entire church family, I want to welcome you to Laver Transformation Ministries. Whether you're exploring faith for the first time, returning to church after some time away, or looking for a church home, we're thrilled you're here.</p>
+                    <p>At Laver, we believe that everyone is designed for a purpose greater than themselves. Our doors are open to all who seek truth, community, and a deeper relationship with God.</p>
+                    {% endif %}
+                    <a href="{% url 'about' %}" class="btn btn-primary mt-3">Learn More About Us</a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="welcome-image">
+                    <img src="{% static 'src/church-image.jpg' %}" alt="Church Community" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Mission Section -->
+<section class="section bg-light" id="mission">
+    <div class="container">
+        <div class="section-header text-center">
+            <h2 class="section-title">Our Mission & Vision</h2>
+            <p class="section-subtitle">Guided by faith, driven by purpose</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-6">
+                <div class="mission-card">
+                    <div class="mission-icon"><i class="fas fa-cross"></i></div>
+                    <h3>Our Mission</h3>
+                    {% if church and church.mission %}
+                    <p>{{ church.mission|safe }}</p>
+                    {% else %}
+                    <p>To transform lives through the power of God's Word, creating a community where people from all walks of life can experience spiritual growth, find purpose, and discover their God-given potential.</p>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="mission-card">
+                    <div class="mission-icon"><i class="fas fa-eye"></i></div>
+                    <h3>Our Vision</h3>
+                    {% if church and church.vision %}
+                    <p>{{ church.vision|safe }}</p>
+                    {% else %}
+                    <p>To be a leading force for positive change in Wamala and beyond, raising up generations of believers who are rooted in faith, equipped for service, and committed to making a difference in their communities.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Service Times -->
+<section class="section" id="services">
+    <div class="container">
+        <div class="section-header text-center">
+            <h2 class="section-title">Join Us for Worship</h2>
+            <p class="section-subtitle">We'd love to worship with you</p>
+        </div>
+        <div class="row g-4">
+            {% for st in service_times %}
+            <div class="col-lg-4 col-md-6">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-church"></i></div>
+                    <h4>{{ st.name }}</h4>
+                    <p class="service-day">{{ st.day }}</p>
+                    <p class="service-time">{{ st.time }}</p>
+                    {% if st.description %}<p class="service-desc">{{ st.description }}</p>{% endif %}
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-lg-4 col-md-6">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-sun"></i></div>
+                    <h4>Sunday Service</h4>
+                    <p class="service-day">Sunday</p>
+                    <p class="service-time">9:00 AM</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-users"></i></div>
+                    <h4>Youth Service</h4>
+                    <p class="service-day">Sunday</p>
+                    <p class="service-time">2:00 PM</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-bible"></i></div>
+                    <h4>Bible Study</h4>
+                    <p class="service-day">Wednesday</p>
+                    <p class="service-time">7:00 PM</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Upcoming Events -->
+{% if upcoming_events %}
+<section class="section bg-primary text-white" id="events">
+    <div class="container">
+        <div class="section-header text-center">
+            <h2 class="section-title">Upcoming Events</h2>
+            <p class="section-subtitle">Don't miss what God is doing</p>
+        </div>
+        <div class="row g-4">
+            {% for event in upcoming_events %}
+            <div class="col-lg-4">
+                <div class="event-card">
+                    <div class="event-date">{{ event.start_date|date:"M d" }}</div>
+                    <h4>{{ event.title }}</h4>
+                    <p><i class="fas fa-map-marker-alt me-2"></i>{{ event.location }}</p>
+                    <p class="event-time"><i class="fas fa-clock me-2"></i>{{ event.start_date|time:"h:i A" }}</p>
+                    <a href="{% url 'event_detail' event.slug %}" class="btn btn-sm btn-outline-light">Learn More</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-4">
+            <a href="{% url 'events' %}" class="btn btn-light">View All Events</a>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Sermons -->
+{% if featured_sermons %}
+<section class="section" id="sermons">
+    <div class="container">
+        <div class="section-header text-center">
+            <h2 class="section-title">Latest Sermons</h2>
+            <p class="section-subtitle">Be encouraged by God's Word</p>
+        </div>
+        <div class="row g-4">
+            {% for sermon in featured_sermons %}
+            <div class="col-lg-4">
+                <div class="sermon-card">
+                    <div class="sermon-thumbnail">
+                        <i class="fas fa-play"></i>
+                    </div>
+                    <div class="sermon-content">
+                        <span class="sermon-date"><i class="far fa-calendar"></i> {{ sermon.date_preached|date:"M d, Y" }}</span>
+                        <h4>{{ sermon.title }}</h4>
+                        <p class="sermon-preacher">{{ sermon.speaker }}</p>
+                        <a href="{% url 'sermon_detail' sermon.slug %}" class="btn btn-sm btn-outline-primary">Watch Now</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-4">
+            <a href="{% url 'sermons' %}" class="btn btn-primary">View All Sermons</a>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Testimonials -->
+{% if testimonials %}
+<section class="section bg-light" id="testimonials">
+    <div class="container">
+        <div class="section-header text-center">
+            <h2 class="section-title">What People Are Saying</h2>
+            <p class="section-subtitle">Stories of transformation</p>
+        </div>
+        <div class="row g-4">
+            {% for testimonial in testimonials %}
+            <div class="col-lg-4">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <i class="fas fa-quote-left quote-icon"></i>
+                        <p>"{{ testimonial.testimony|truncatewords:30 }}"</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <h5>{{ testimonial.name }}</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Give Section -->
+<section class="section give-section" id="giving">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h2>Partner With Us</h2>
+                <p class="lead">Your generosity makes ministry possible</p>
+                <p>Every gift, whether large or small, helps us continue our mission to transform lives through God's Word. Thank you for your partnership in the Gospel!</p>
+                <a href="{% url 'give' %}" class="btn btn-primary btn-lg mt-3"><i class="fas fa-heart me-2"></i>Give Online</a>
+            </div>
+            <div class="col-lg-6">
+                <div class="give-icon"><i class="fas fa-hand-holding-heart"></i></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact CTA -->
+<section class="section bg-dark text-white" id="contact-cta">
+    <div class="container text-center">
+        <h2>Get In Touch</h2>
+        <p class="lead mb-4">We'd love to hear from you</p>
+        <div class="contact-cta-buttons">
+            <a href="{% url 'contact' %}" class="btn btn-primary btn-lg me-3"><i class="fas fa-envelope me-2"></i>Contact Us</a>
+            <a href="{% url 'prayer_request' %}" class="btn btn-outline-light btn-lg"><i class="fas fa-pray me-2"></i>Prayer Request</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

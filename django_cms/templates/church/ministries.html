@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Page Hero -->
+<section class="page-hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h1>Our Ministries</h1>
+        <p>Find your place to serve, grow, and make a difference</p>
+    </div>
+</section>
+
+<!-- Ministries Intro -->
+<section class="ministries-intro">
+    <div class="container">
+        <p>At Laver Transformation Ministries, we believe everyone has a calling and a purpose. Our ministries provide opportunities for you to use your gifts, grow in faith, and serve others. Whether you're a youth, a parent, a senior, or anywhere in between, there's a place for you here.</p>
+    </div>
+</section>
+
+<!-- Ministries Grid -->
+<section class="all-ministries">
+    <div class="container">
+        <div class="ministries-full-grid">
+            {% for ministry in ministries %}
+            <div class="ministry-full-card">
+                <div class="ministry-icon"><i class="fas {{ ministry.icon|default:'fa-church' }}"></i></div>
+                <div class="ministry-content">
+                    <h3>{{ ministry.name }}</h3>
+                    {% if ministry.description %}
+                    <p>{{ ministry.description|safe|truncatewords:50 }}</p>
+                    {% endif %}
+                    {% if ministry.leader %}
+                    <p class="ministry-leader"><i class="fas fa-user"></i> Led by {{ ministry.leader.name }}</p>
+                    {% endif %}
+                    <a href="{% url 'ministry_detail' ministry.slug %}" class="btn btn-primary">Learn More</a>
+                </div>
+            </div>
+            {% empty %}
+            <!-- Default ministries if none in database -->
+            <div class="ministry-full-card">
+                <div class="ministry-icon"><i class="fas fa-users"></i></div>
+                <div class="ministry-content">
+                    <h3>Youth Ministry</h3>
+                    <p class="ministry-tagline">Empowering the Next Generation</p>
+                    <p>Our Youth Ministry is dedicated to raising up young people who are rooted in faith and ready to impact their generation.</p>
+                    <a href="{% url 'contact' %}" class="btn btn-primary">Join Youth Ministry</a>
+                </div>
+            </div>
+            <div class="ministry-full-card">
+                <div class="ministry-icon"><i class="fas fa-child"></i></div>
+                <div class="ministry-content">
+                    <h3>Children's Ministry</h3>
+                    <p class="ministry-tagline">Nurturing Little Hearts</p>
+                    <p>Our Children's Ministry provides a safe, fun, and biblically grounded environment for children to grow in their faith.</p>
+                    <a href="{% url 'contact' %}" class="btn btn-primary">Learn More</a>
+                </div>
+            </div>
+            <div class="ministry-full-card">
+                <div class="ministry-icon"><i class="fas fa-music"></i></div>
+                <div class="ministry-content">
+                    <h3>Worship Ministry</h3>
+                    <p class="ministry-tagline">Leading Hearts to God</p>
+                    <p>Our Worship Ministry creates an atmosphere where people can encounter God's presence through praise and worship.</p>
+                    <a href="{% url 'contact' %}" class="btn btn-primary">Join Worship Team</a>
+                </div>
+            </div>
+            <div class="ministry-full-card">
+                <div class="ministry-icon"><i class="fas fa-pray"></i></div>
+                <div class="ministry-content">
+                    <h3>Prayer Ministry</h3>
+                    <p class="ministry-tagline">Building a House of Prayer</p>
+                    <p>Our Prayer Ministry is committed to interceding for our community, nation, and the world.</p>
+                    <a href="{% url 'prayer_request' %}" class="btn btn-primary">Submit Prayer Request</a>
+                </div>
+            </div>
+            <div class="ministry-full-card">
+                <div class="ministry-icon"><i class="fas fa-hands-helping"></i></div>
+                <div class="ministry-content">
+                    <h3>Community Outreach</h3>
+                    <p class="ministry-tagline">Serving Our Community</p>
+                    <p>Our Outreach Ministry is committed to meeting the physical and spiritual needs of our community.</p>
+                    <a href="{% url 'contact' %}" class="btn btn-primary">Get Involved</a>
+                </div>
+            </div>
+            <div class="ministry-full-card">
+                <div class="ministry-icon"><i class="fas fa-female"></i></div>
+                <div class="ministry-content">
+                    <h3>Women's Ministry</h3>
+                    <p class="ministry-tagline">Women of Purpose</p>
+                    <p>Our Women's Ministry creates a space for women to grow in faith, build meaningful relationships, and discover their God-given purpose.</p>
+                    <a href="{% url 'contact' %}" class="btn btn-primary">Join Women's Ministry</a>
+                </div>
+            </div>
+            <div class="ministry-full-card">
+                <div class="ministry-icon"><i class="fas fa-male"></i></div>
+                <div class="ministry-content">
+                    <h3>Men's Ministry</h3>
+                    <p class="ministry-tagline">Godly Men of Integrity</p>
+                    <p>Our Men's Ministry challenges men to grow in their faith, lead their families with integrity, and serve the church and community with excellence.</p>
+                    <a href="{% url 'contact' %}" class="btn btn-primary">Join Men's Ministry</a>
+                </div>
+            </div>
+            <div class="ministry-full-card">
+                <div class="ministry-icon"><i class="fas fa-concierge-bell"></i></div>
+                <div class="ministry-content">
+                    <h3>Ushers & Hospitality</h3>
+                    <p class="ministry-tagline">Welcoming with Love</p>
+                    <p>Our Ushers & Hospitality Ministry ensures everyone who walks through our doors feels welcomed and cared for.</p>
+                    <a href="{% url 'contact' %}" class="btn btn-primary">Serve as Usher</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Volunteer CTA -->
+<section class="volunteer-cta">
+    <div class="container">
+        <h2><i class="fas fa-heart"></i> Ready to Serve?</h2>
+        <p>There's a place for everyone at Laver Transformation Ministries. Whether you have time, talents, or treasures to give, we welcome your contribution to our mission of transforming lives.</p>
+        <a href="{% url 'contact' %}" class="btn btn-primary"><i class="fas fa-envelope"></i> Contact Us to Get Involved</a>
+    </div>
+</section>
+{% endblock %}

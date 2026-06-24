@@ -1,0 +1,25 @@
+# Django CMS dependencies for Laver Transformation Ministries
+
+# Django framework
+Django>=4.2,<5.0
+
+# Database
+django-cleanup>=8.0.0
+
+# Rich text editor
+django-ckeditor>=6.5.1
+
+# Image handling
+Pillow>=10.0.0
+
+# Static file serving
+whitenoise>=6.5.0
+
+# BeautifulSoup for HTML parsing
+beautifulsoup4>=4.12.0
+
+# lxml for better HTML parsing
+lxml>=4.9.0
+
+# For timezone support
+pytz>=2023.3

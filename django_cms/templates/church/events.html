@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Page Hero -->
+<section class="page-hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h1>Upcoming Events</h1>
+        <p>Join us in our services, programs, and community gatherings</p>
+    </div>
+</section>
+
+<!-- Events Section -->
+<section class="events-page">
+    <div class="container">
+        <!-- Upcoming Events -->
+        <div class="events-section">
+            <h2><i class="fas fa-calendar-alt"></i> Upcoming Events</h2>
+            
+            <div class="events-grid">
+                {% for event in events %}
+                <div class="event-grid-card">
+                    <div class="event-grid-date">
+                        <span class="day">{{ event.start_date|date:"d" }}</span>
+                        <span class="month">{{ event.start_date|date:"b"|upper }}</span>
+                    </div>
+                    <div class="event-grid-content">
+                        <h3>{{ event.title }}</h3>
+                        <p class="event-grid-meta">
+                            <span><i class="far fa-clock"></i> {{ event.start_date|date:"h:i A" }}{% if event.end_date %} - {{ event.end_date|date:"h:i A" }}{% endif %}</span>
+                            <span><i class="fas fa-map-marker-alt"></i> {{ event.location }}</span>
+                        </p>
+                        {% if event.description %}
+                        <p class="event-grid-desc">{{ event.description|striptags|truncatewords:20 }}</p>
+                        {% endif %}
+                        <a href="{% url 'event_detail' event.slug %}" class="btn btn-sm btn-outline">Learn More</a>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="no-content">
+                    <p>No upcoming events at the moment. Check back soon!</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Weekly Services Reminder -->
+        <div class="weekly-services">
+            <h2><i class="fas fa-church"></i> Weekly Services</h2>
+            <p>Join us every week for these regular services:</p>
+            <div class="services-grid">
+                {% for st in service_times %}
+                <div class="service-item">
+                    <div class="service-icon"><i class="fas fa-sun"></i></div>
+                    <h3>{{ st.name }}</h3>
+                    <p class="service-time">{{ st.day }} {{ st.time }}</p>
+                    {% if st.description %}<p>{{ st.description }}</p>{% endif %}
+                </div>
+                {% empty %}
+                <div class="service-item">
+                    <div class="service-icon"><i class="fas fa-sun"></i></div>
+                    <h3>Sunday Service</h3>
+                    <p class="service-time">9:00 AM</p>
+                    <p>Morning worship with powerful praise and biblical preaching</p>
+                </div>
+                <div class="service-item">
+                    <div class="service-icon"><i class="fas fa-users"></i></div>
+                    <h3>Youth Service</h3>
+                    <p class="service-time">2:00 PM</p>
+                    <p>Energizing worship for young people</p>
+                </div>
+                <div class="service-item">
+                    <div class="service-icon"><i class="fas fa-bible"></i></div>
+                    <h3>Bible Study</h3>
+                    <p class="service-time">Wednesday 7:00 PM</p>
+                    <p>Deep dive into Scripture</p>
+                </div>
+                <div class="service-item">
+                    <div class="service-icon"><i class="fas fa-pray"></i></div>
+                    <h3>Prayer Meeting</h3>
+                    <p class="service-time">Friday 6:00 PM</p>
+                    <p>United prayer for breakthrough</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        {% if events.has_other_pages %}
+        <nav class="pagination-nav">
+            <ul class="pagination">
+                {% if events.has_previous %}
+                <li><a href="?page={{ events.previous_page_number }}" class="page-link"><i class="fas fa-chevron-left"></i> Previous</a></li>
+                {% endif %}
+                
+                {% for num in events.paginator.page_range %}
+                    {% if events.number == num %}
+                    <li><span class="page-link active">{{ num }}</span></li>
+                    {% elif num > events.number|add:'-3' and num < events.number|add:'3' %}
+                    <li><a href="?page={{ num }}" class="page-link">{{ num }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                
+                {% if events.has_next %}
+                <li><a href="?page={{ events.next_page_number }}" class="page-link">Next <i class="fas fa-chevron-right"></i></a></li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% endif %}
+
+        <!-- Add to Calendar -->
+        <div class="calendar-cta">
+            <h3><i class="fas fa-calendar-plus"></i> Stay Updated</h3>
+            <p>Contact us to add church events to your calendar or receive SMS updates.</p>
+            <a href="{% url 'contact' %}" class="btn btn-primary">Contact Us</a>
+        </div>
+    </div>
+</section>
+{% endblock %}
