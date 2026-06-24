@@ -1,1 +1,0 @@
-# Laver Website Django Project
