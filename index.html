@@ -38,11 +38,17 @@
     <!-- AOS Animation -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
+    <!-- External CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="src/assets/css/page-styles.css">
+    
     <style>
+        /* External CSS variables are loaded from styles.css */
         :root {
-            --primary: #1B4D7A;
-            --primary-dark: #0D2840;
-            --primary-light: #2A6BA3;
+            /* These will be overridden by styles.css but provide fallbacks */
+            --primary: #2C3E50;
+            --primary-dark: #1a252f;
+            --primary-light: #34495e;
             --secondary: #D4A853;
             --secondary-light: #E8C97A;
             --accent: #2E8B57;
