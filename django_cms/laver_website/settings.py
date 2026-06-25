@@ -2,14 +2,21 @@
 Django settings for laver_website project.
 """
 
-from pathlib import Path
 import os
+from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-dev-key-change-in-production')
-DEBUG = os.environ.get('DEBUG', 'True') == 'True'
-ALLOWED_HOSTS = ['*']
+# Security: SECRET_KEY must be set in production
+SECRET_KEY = os.environ.get('SECRET_KEY')
+if not SECRET_KEY:
+    if os.environ.get('DEBUG', '').lower() == 'true':
+        SECRET_KEY = 'django-insecure-dev-key-do-not-use-in-production'
+    else:
+        raise ValueError("SECRET_KEY environment variable must be set in production")
+
+# Security: ALLOWED_HOSTS should be configured for production
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
