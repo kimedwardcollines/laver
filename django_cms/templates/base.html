@@ -7,6 +7,12 @@
     <meta name="description" content="{% block meta_description %}Laver Transformation Ministries - A place of spiritual growth and transformation in Wamala, Uganda{% endblock %}">
     <title>{% block title %}{% if church %}{{ church.name }}{% else %}Laver Transformation Ministries{% endif %}{% endblock %}</title>
     
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="{% block og_title %}{% if church %}{{ church.name }}{% else %}Laver Transformation Ministries{% endif %}{% endblock %}">
+    <meta property="og:description" content="{% block meta_description %}A place of spiritual growth and transformation in Wamala, Uganda{% endblock %}">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="en_UG">
+    
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛪</text></svg>">
     
@@ -104,9 +110,10 @@
                 <div class="footer-social">
                     <h4>Follow Us</h4>
                     <div class="social-links">
-                        {% if church.facebook %}<a href="{{ church.facebook }}" target="_blank"><i class="fab fa-facebook"></i></a>{% endif %}
-                        {% if church.instagram %}<a href="{{ church.instagram }}" target="_blank"><i class="fab fa-instagram"></i></a>{% endif %}
-                        {% if church.youtube %}<a href="{{ church.youtube }}" target="_blank"><i class="fab fa-youtube"></i></a>{% endif %}
+                        {% if church.facebook %}<a href="{{ church.facebook }}" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i></a>{% endif %}
+                        {% if church.instagram %}<a href="{{ church.instagram }}" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>{% endif %}
+                        {% if church.youtube %}<a href="{{ church.youtube }}" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i></a>{% endif %}
+                        {% if church.whatsapp %}<a href="{{ church.whatsapp }}" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>{% endif %}
                     </div>
                 </div>
             </div>
