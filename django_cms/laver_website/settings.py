@@ -9,8 +9,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Security: SECRET_KEY must be set in production
 SECRET_KEY = os.environ.get('SECRET_KEY')
+DEBUG = os.environ.get('DEBUG', '').lower() in ('true', '1', 'yes')
 if not SECRET_KEY:
-    if os.environ.get('DEBUG', '').lower() == 'true':
+    if DEBUG:
         SECRET_KEY = 'django-insecure-dev-key-do-not-use-in-production'
     else:
         raise ValueError("SECRET_KEY environment variable must be set in production")
