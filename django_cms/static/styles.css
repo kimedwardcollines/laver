@@ -333,7 +333,7 @@ body {
 .hero {
     min-height: 100vh;
     background: linear-gradient(var(--color-spiritual), var(--color-spiritual-light)),
-                url('hero-bg.jpg') center/cover;
+                url('/static/church-image.jpg') center/cover;
     display: flex;
     align-items: center;
     text-align: center;
